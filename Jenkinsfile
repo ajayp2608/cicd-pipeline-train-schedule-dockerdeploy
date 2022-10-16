@@ -14,7 +14,7 @@ pipeline {
             }
             steps {
                 script {
-                    app = docker.build("ajayp2608/train-schedule")
+                    app = docker.build("ajaypatil26/train-schedule")
                     app.inside {
                         sh 'echo $(curl localhost:8080)'
                     }
