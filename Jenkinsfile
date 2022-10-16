@@ -38,7 +38,9 @@ pipeline {
             when {
                 branch 'master'
             }
-            steps {
+            
+                    }
+        steps {
                 input 'Deploy to Production?'
                 milestone(1)
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
@@ -51,7 +53,6 @@ pipeline {
                             echo: 'caught error: $err'
                         }
                         sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name train-schedule -p 8080:8080 -d ajaypatil26/train-schedule:${env.BUILD_NUMBER}\""
-                    }
                 }
             }
         }
